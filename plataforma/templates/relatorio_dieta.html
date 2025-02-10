@@ -1,0 +1,88 @@
+{% extends 'base_pdf.html' %}
+{% load static %}
+
+{% block 'titulo' %}Dieta paciente {{paciente.nome}}{% endblock  %}
+
+{% block 'plataforma' %}
+    <style> 
+        h2{
+            color: #27DB8F;
+         }
+
+        .head-refeicao {
+            background: #27DB8F;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .fundo-alimentar {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .refeicao {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .body-refeicao {
+            padding: 10px;
+        }
+
+        .opcao {
+            padding: 10px;
+            border-left: 4px solid #27DB8F;
+            background: #f4f4f4;
+            border-radius: 4px;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-md-3 dados descricao">
+            <h2>Plano Alimentar - {{paciente.nome}}</h2>
+            <h5>Nutricionista: {{paciente.nutri.username}}</h5>
+            
+        </div>
+        
+    </div>
+    <hr>
+
+    <div class="fundo-alimentar">
+            
+        {% for re in refeicoes %}
+        <div class="refeicao">
+            <div class="head-refeicao">
+                <span>{{re.titulo}}</span>
+
+                <span style="float: right;">{{re.horario}}h</span>
+
+            </div>
+
+            <div class="body-refeicao">
+                {%for i in opcao%}
+                    {% if i.refeicao == re %}
+                        <div class="opcao">
+                            <div class="row">
+
+                                <div class="col-md-10">
+                                    {{i.descricao}}
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr>
+                        <br>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+{%endblock%}

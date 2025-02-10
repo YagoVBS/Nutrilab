@@ -1,0 +1,66 @@
+{% extends 'base_pdf.html' %}
+{% load static %}
+
+{% block 'plataforma' %}
+
+
+   <br>
+   <br>
+    <div class="row">
+
+        <div class="col-md-3">
+                {% if paciente.sexo == "M"%}
+                    <img src="{% static 'plataforma/img/perfil2.png' %}">
+                {% else %}
+                    <img src="{% static 'plataforma/img/perfil1.png' %}">
+                {% endif %}
+        </div>
+
+        <div class="col-md-3 dados descricao">
+            <h4>{{paciente.nome}}</h4>
+            <h6>{{paciente.idade}} Anos</h6>
+        </div>
+        
+    </div>
+    <hr>
+
+
+    <div class="fundo-alimentar">
+        
+        {% for re in refeicao %}
+        <div class="refeicao">
+            <div class="head-refeicao">
+                <span>{{re.titulo}}</span>
+    
+                <span style="float: right;">{{re.horario}}h</span>
+    
+            </div>
+
+            <div class="body-refeicao">
+                {%for i in opcao%}
+                    {% if i.refeicao == re %}
+                        <div class="opcao">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img width="100%" src="{{i.imagem.url}}">
+                                </div>
+
+                                <div class="col-md-10">
+                                    {{i.descricao}}
+                                </div>
+
+                            </div>
+                        </div>
+                        <br>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+
+
+{% endblock%}
